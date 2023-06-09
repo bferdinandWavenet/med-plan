@@ -25,6 +25,9 @@ class Day
     #[ORM\OneToMany(mappedBy: 'day', targetEntity: Shift::class)]
     private Collection $shifts;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->shifts = new ArrayCollection();
@@ -85,6 +88,18 @@ class Day
                 $shift->setDay(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
